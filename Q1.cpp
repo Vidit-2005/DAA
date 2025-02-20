@@ -1,45 +1,61 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int binarylow(int arr[],int size,int target)
+void selection(int arr[],int n)
 {
-    int low=0,high=size,mid;
-    while(low<=high)
+    for(int i=0;i<n;i++)
     {
-        mid=(high+low)/2;
-        if(arr[mid]>=target)
-            high=mid-1;
-        else
-            low=mid+1;
+        int min=i;
+        for(int j=i+1;j<n;j++)
+        {
+            if(arr[min]>arr[j])
+                min=j;
+        }
+        if(min!=i)
+            swap(arr[i], arr[min]);
     }
-    return low;
 }
 
-int binaryhigh(int arr[],int size,int target)
+void insertion(int arr[],int n)
 {
-    int low=0,high=size,mid,ans=-1;
-    while(low<=high)
+    for(int i=1;i<n;i++)
     {
-        mid=low + (high-low)/2;
-        if(arr[mid]<=target)
+        int j=i-1;
+        int key=arr[i];
+        while(j>=0 && arr[j]>key)
         {
-            low=mid+1;
-            ans=mid;
+            arr[j+1]=arr[j];
+            j--;
         }
-        else
-            high=mid-1;
+        arr[j+1] = key;
     }
-    return ans;
 }
 
 int main()
 {
-    int arr[]={1,3,5,5,5,5,7,7,9};
-    int target=5,low,high;
-    int size=sizeof(arr)/sizeof(arr[0]) -1 ;
-    cout<<"Size= "<<size<<endl;
-    low=binarylow(arr,size,target);
-    high=binaryhigh(arr,size,target);
-    cout<<"number of occurence= "<<high-low+1;
-    return 0;
+    int n,*arr,*arr2;
+    cout<<"Enter the size of array: ";
+    cin>>n;
+    arr= new int[n];
+    arr2= new int[n];
+    cout<<"enter the numbers: ";
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+        arr2[i]=arr[i];
+    }
+
+    selection(arr,n);
+    cout<<endl<<"sorted array is: ";
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+
+    cout<<endl<<"sorted array is: ";
+    insertion(arr2,n);
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr2[i]<<" ";
+    }
 }

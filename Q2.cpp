@@ -1,37 +1,63 @@
 #include<bits/stdc++.h>
 using namespace std;
-void index(int arr[],int size)
+void merges(int arr[],int l,int mid,int r)
 {
-    int i,j,k;
-    for(k=0;k<size;k++)
+    int *arr1=new int[(r-l)+1];
+    int i=l,j=mid+1,k=0;
+    while(i<=mid && j<=r )
     {
-        i=0,j=size-1;
-        while(i+1<j)
-        {
-            if(arr[i]+arr[j] > arr[k])
-                j--;
-            else if(arr[i]+arr[j] < arr[k])
-                i++;
-            else
-                break;
-        }
-        if(arr[i]+arr[j] == arr[k])
-        {
-            cout<<"i= "<<i<<"\tj= "<<j<<"\tk= "<<k<<endl;
-            return;
-        }
-        else if(k+1==size)
-        {
-            cout<<"Element not found!!!";
-        }
+        if(arr[i]<arr[j])
+            arr1[k++]=arr[i++];
+        else
+            arr1[k++]=arr[j++];
     }
+    while(i<=mid)
+    {
+        arr1[k++]=arr[i++];
+    }
+    while(j<=r)
+    {
+            arr1[k++]=arr[j++];
+    }
+    for(i=l,j=0;i<=r;i++,j++)
+        arr[i]=arr1[j];
 }
-
-
+void msort(int arr[],int l,int r)
+{
+    if(l<r)
+    {
+        int mid=l+(r-l)/2;
+        msort(arr,l,mid);
+        msort(arr,mid+1,r);
+        merges(arr,l,mid,r);
+    }
+    else return;
+}
 int main()
 {
-    int arr[]={64,69,82,95,99,107,113,141,171,350,369,400,511,590,666};
-    int size=sizeof(arr)/sizeof(arr[0]);
-    index(arr,size);
-    return 0;
+    int n,*arr;
+    cout<<"Enter the size of array: ";
+    cin>>n;
+    arr= new int[n];
+    cout<<"enter the numbers: ";
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+
+    msort(arr,0,n);
+    cout<<endl<<"sorted array is: ";
+    int f=0;
+    for(int i=0;i<n-1;i++)
+    {
+        if(arr[i]==arr[i+1])
+        {
+            cout<<"Yes!!!!"<<endl;
+            f=1;
+            break;
+        }
+    }
+    if(!(f))
+        cout<<"NO!!!!"<<endl;
 }
+

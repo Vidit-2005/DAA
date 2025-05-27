@@ -74,17 +74,34 @@ void bell(int src,vector<vector<int>>&edges,int V)
     vector<int>dis(V,INT_MAX);
     vector<int>parent(V,-1);
     dis[src]=0;
-    for(int i=0;i<V;i++)
-    {
-        for(int j=0;j<V;j++)
-        {
-            if(edges[i][j]!=0 && dis[i] != INT_MAX && dis[i]+edges[i][j] < dis[j])
+    for(int k=0;k<V-1;k++)
+   {
+       int c=0;
+       for(int i=0;i<V;i++)
+       {
+            for(int j=0;j<V;j++)
             {
-                dis[j]=dis[i]+edges[i][j];
-                parent[j]=i;
+                if(edges[i][j]!=0 && dis[i] != INT_MAX && dis[i]+edges[i][j] < dis[j])
+                {
+                   dis[j]=dis[i]+edges[i][j];
+                   parent[j]=i;
+                   c++;
+                }
+            }
+        }
+        if(!c)
+            break;
+    }
+
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            if (edges[i][j] != 0 && dis[i] != INT_MAX && dis[i] + edges[i][j] < dis[j]) {
+                cout << "Negative weight cycle detected.\n";
+                return;
             }
         }
     }
+    
 
     for (int i = 0; i < V; i++) {
         cout << "Shortest distance from " << src << " to " << i << ": " << dis[i] << "\n";

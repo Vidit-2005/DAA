@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Q1
+
 void dis(vector<vector<int>>edges,int V,int src)
 {
     priority_queue<pair<int,int>,vector<pair<int,int>>,greater<>>pq;
@@ -42,10 +44,9 @@ void dis(vector<vector<int>>edges,int V,int src)
             path.push_back(v);
         reverse(path.begin(),path.end());
         for (int j = 0; j < path.size(); j++) {
-            cout << path[j];
-            if (j != path.size() - 1) cout << " -> ";
+            cout << " -> "<< path[j];
         }
-        cout << "\n\n";
+        cout <<endl;
     }
 }
 
@@ -66,8 +67,62 @@ void Q1()
     dis(edges,V,src);
 }
 
+// Q2
+
+void bell(int src,vector<vector<int>>&edges,int V)
+{
+    vector<int>dis(V,INT_MAX);
+    vector<int>parent(V,-1);
+    dis[src]=0;
+    for(int i=0;i<V;i++)
+    {
+        for(int j=0;j<V;j++)
+        {
+            if(edges[i][j]!=0 && dis[i] != INT_MAX && dis[i]+edges[i][j] < dis[j])
+            {
+                dis[j]=dis[i]+edges[i][j];
+                parent[j]=i;
+            }
+        }
+    }
+
+    for (int i = 0; i < V; i++) {
+        cout << "Shortest distance from " << src << " to " << i << ": " << dis[i] << "\n";
+        if (dis[i] == INT_MAX) {
+            cout << "No path exists\n";
+            continue;
+        }
+        cout << "Path: ";
+        vector<int> path;
+        for (int v = i; v != -1; v = parent[v])
+            path.push_back(v);
+        reverse(path.begin(),path.end());
+        for (int j = 0; j < path.size(); j++) {
+            cout << " -> "<< path[j];
+        }
+        cout <<endl;
+    }
+}
+
+void Q2()
+{
+    int V;
+    cin>>V;
+    vector<vector<int>>edges(V,vector<int>(V));
+    for(int i=0;i<V;i++)
+    {
+        for(int j=0;j<V;j++)
+        {
+            cin>>edges[i][j];
+        }
+    }
+    int src;
+    cin>>src;
+    bell(src,edges,V);
+}
+
 int main()
 {
-    Q1();
+    Q2();
     return 0;
 }

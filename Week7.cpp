@@ -139,9 +139,52 @@ void Q2()
 }
 
 // Q3
+pair<int,bool> pa(int src,int des,int k,vector<vector<int>>&edges)
+{
+    if (k == 0) {
+        if (src == des) return {0, true};
+        else return {INT_MAX, false};
+    }
+    
+    int minWeight = INT_MAX;
+    bool found = false;
+
+    for (int v = 0; v < edges.size(); v++) {
+        if (edges[src][v] != 0) {
+            pair<int, bool> res = pa(v, des, k - 1, edges);
+            if (res.second && res.first != INT_MAX) {
+                minWeight = min(minWeight, edges[src][v] + res.first);
+                found = true;
+            }
+        }
+    }
+    return {minWeight, found};
+}
+
 void Q3()
 {
-
+    int V;
+    cin>>V;
+    vector<vector<int>>edges(V,vector<int>(V));
+    for(int i=0;i<V;i++)
+    {
+        for(int j=0;j<V;j++)
+        {
+            cin>>edges[i][j];
+        }
+    }
+    int src,des;
+    cin>>src>>des;
+    int k;
+    cin>>k;
+    pair<int,bool>temp=pa(src,des,k,edges);
+    if(temp.second)
+    {
+        cout << "Weight of shortest path from (" << src << " , " << des << ") with " << k << " edges: " << temp.first << endl;
+    }
+    else{
+        cout<<"Path don't exist's!!!"<<endl;
+    }
 }
 
 int main()

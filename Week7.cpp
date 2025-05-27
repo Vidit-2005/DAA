@@ -115,7 +115,7 @@ void bell(int src,vector<vector<int>>&edges,int V)
             path.push_back(v);
         reverse(path.begin(),path.end());
         for (int j = 0; j < path.size(); j++) {
-            cout << " -> "<< path[j];
+            cout << " -> "<< path[j]+1;
         }
         cout <<endl;
     }
@@ -138,8 +138,16 @@ void Q2()
     bell(src,edges,V);
 }
 
+// Q3
+void Q3()
+{
+
+}
+
 int main()
 {
-    Q2();
+    // Q1();
+    // Q2();
+    Q3();
     return 0;
 }

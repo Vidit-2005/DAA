@@ -70,6 +70,7 @@ bool findEqualProductPairs(const vector<int>& arr) {
             int prod = arr[i] * arr[j];
 
             if (productMap.find(prod) != productMap.end()) {
+                
                 auto p = productMap[prod];
                 int x=p.first;
                 int y=p.second;

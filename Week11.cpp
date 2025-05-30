@@ -11,6 +11,7 @@ int coin(vector<int>&coins,int N,int n,vector<vector<int>>&sum)
     if(n<0 || N<0)
         return 0;
     
+        
     if(sum[N][n]!=-1) return sum[N][n];
     int l=0,r=0;
     if(N>=coins[n])

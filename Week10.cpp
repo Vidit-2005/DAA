@@ -55,6 +55,7 @@ void Q3()
         cin>>arr[i];
     int count=1;
     int ele=arr[0];
+    
     for(int i=1;i<n;i++)
     {
         if(count==0)

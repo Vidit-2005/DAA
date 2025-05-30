@@ -11,13 +11,14 @@ bool isUgly(int num) {
 
 int getNthUgly(int n) {
     int count = 0;
-    int i = 1;
+    int i = 1; 
     while (true) {
         if (isUgly(i)) {
             count++;
             if (count == n)
                 return i;
         }
+        
         i++;
     }
 }

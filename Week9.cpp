@@ -109,6 +109,7 @@ int cost(vector<int>arr)
     }
     return total;
 }
+
 void Q3()
 {
     int n;

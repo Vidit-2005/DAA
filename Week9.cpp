@@ -93,8 +93,34 @@ void Q2()
     knap(temp,n,mx);
 }
 
+// Q3
+int cost(vector<int>arr)
+{
+    priority_queue<int,vector<int>,greater<>>pq(arr.begin(),arr.end());
+    int total=0;
+    while(pq.size()>1)
+    {
+        int x=pq.top();
+        pq.pop();
+        int y=pq.top();
+        pq.pop();
+        total+=(x+y);
+        pq.push(x+y);
+    }
+    return total;
+}
+void Q3()
+{
+    int n;
+    cin>>n;
+    vector<int>arr(n);
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    cout<<"Cost: "<<cost(arr)<<endl;
+}
+
 int main()
 {
-    Q2();
+    Q3();
     return 0;
 }

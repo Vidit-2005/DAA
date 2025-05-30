@@ -30,7 +30,7 @@ void Q1()
 {
     int n;
     cin>>n;
-    vector<vector<int>>se(n,vector<int>(n));
+    vector<vector<int>>se(n,vector<int>(2));
     for(int i=0;i<n;i++)
         cin>>se[i][0];
     for(int i=0;i<n;i++)
@@ -45,8 +45,39 @@ void Q2()
     
 }
 
+// Q3
+void Q3()
+{
+    int n;
+    cin>>n;
+    vector<int>arr(n);
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    int count=1;
+    int ele=arr[0];
+    for(int i=1;i<n;i++)
+    {
+        if(count==0)
+            ele=arr[i];
+        if(ele!=arr[i])
+            count--;
+        else
+            count++;
+    }
+    int c=0;
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]==ele)
+            c++;
+    }
+    if(c>n/2)
+        cout<<"YEs";
+    else
+        cout<<"no";
+}
+
 int main()
 {
-    Q1();
+    Q3();
     return 0;
 }
